@@ -86,19 +86,18 @@ while True:
                 if not new_interest_rate.isdigit():
                     print("Nhập lãi suất năm không hợp lệ")
                     continue
-                new_interest_rate = int(new_interest_rate)
+                new_interest_rate = float(new_interest_rate)
                 if new_interest_rate <= 0:
                     print("Nhập lãi suất năm không hợp lệ")
                     continue
                 break
-            new_status = "active"
             saving_accounts.append({
                 "account_id": new_account_id,
                 "customer_name": new_customer_name,
                 "balance": new_balance,
                 "term_months": new_term_months,
                 "interest_rate": new_interest_rate,
-                "status": new_status
+                "status": "active"
             })
 
         case 3:
@@ -145,14 +144,15 @@ while True:
                     else:
                         print("Không thể cập nhật sổ tiết kiệm đã tất toán!")
                         break
-                else:
-                    print("Không tìm thấy mã sổ tiết kiệm!")
-                    break
+            else:
+                print("Không tìm thấy mã sổ tiết kiệm!")
+                break
         case 4:
             settlement_account_id = input("Nhập mã sổ tiết kiệm cần tất toán/xóa: ").strip().upper()
             for user in saving_accounts:
                 if user["account_id"] == settlement_account_id:
                     user["status"] = "closed"
+                    break
             else:
                 print("Không tìm thấy mã sổ tiết kiệm cần tất toán/xóa")
         
